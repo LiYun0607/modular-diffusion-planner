@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ROS / colcon
+build/
+install/
+log/
+.colcon-defaults.yaml
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large model artefacts (download via Autoware setup script — see README)
+*.onnx
+*.engine
+*.trt
+*.plan
+
+# Frame dumps and per-run logs
+frame_*.bin
+summary.log
+
+# LaTeX build artefacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz

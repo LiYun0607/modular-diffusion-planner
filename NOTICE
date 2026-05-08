@@ -1,0 +1,40 @@
+Modular Diffusion Planner — ITSC 2026 release
+Copyright 2026 The University of Tokyo and TIER IV, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this work except in compliance with the License.  You may obtain a copy of the
+License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+
+================================================================================
+Third-party attributions
+================================================================================
+
+This repository contains a derivative of the autoware_diffusion_planner ROS 2
+package from the Autoware Universe project:
+
+    https://github.com/autowarefoundation/autoware_universe
+    Copyright (c) 2025 TIER IV, Inc.
+    Licensed under the Apache License, Version 2.0.
+
+Our modifications add:
+  - Split-ONNX inference (context encoder + DiT core + turn-indicator head)
+  - Native C++ implementation of DPM-Solver++ (orders 1, 2) and DDIM
+  - Encoder caching across denoising steps
+  - Per-step trajectory observability for analysis
+  - Runtime-configurable solver type and step count
+
+A full diff against upstream Autoware Universe is provided in
+patches/modular_planner_vs_upstream.patch.
+
+The diffusion planner architecture is based on:
+
+    Zheng, Y., Wang, R., Yan, Y., Hu, X., Wang, S., Tomizuka, M., Zhan, W.
+    "Diffusion-Based Planning for Autonomous Driving with Flexible Guidance"
+    arXiv:2501.15564, 2025.
+    Original implementation: https://github.com/ZhengYinan-AIR/Diffusion-Planner
