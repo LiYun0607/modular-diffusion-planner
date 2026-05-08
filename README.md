@@ -5,7 +5,6 @@
 > Li Yun, Simon Thompson, Yidu Zhang, Ehsan Javanmardi, Manabu Tsukada
 >
 > *IEEE International Conference on Intelligent Transportation Systems (ITSC) 2026*
-> [Paper PDF](docs/itsc2026_paper.pdf)
 
 This repository accompanies our ITSC 2026 paper. We decompose a monolithic
 18,398-node ONNX diffusion planner into three independently executable modules
@@ -38,8 +37,7 @@ itsc2026-release/
 │   ├── analyze_steps.py               #   step-count sensitivity from closed-loop log
 │   ├── gen_figures.py                 #   Reproduces all paper figures
 │   └── data/                          #   Cached .npz results from our runs
-├── figures/                           # Final paper PDFs
-└── docs/itsc2026_paper.pdf            # Camera-ready paper
+└── figures/                           # Final paper figure PDFs
 ```
 
 ## Quick start
@@ -68,7 +66,7 @@ Required model artefacts (downloaded via Autoware's `setup-dev-env.sh`):
 
 The split ONNX files are produced from the monolithic graph using
 [ONNX GraphSurgeon](https://github.com/NVIDIA/TensorRT/tree/main/tools/onnx-graphsurgeon);
-see [`docs/graphsurgeon_recipe.md`](docs/graphsurgeon_recipe.md) (TODO).
+a recipe will be added under `benchmarks/graphsurgeon_recipe.md` (TODO).
 
 ### 2. Launch in AWSIM
 
