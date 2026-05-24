@@ -118,12 +118,20 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
     if max_pairs: pairs = pairs[:max_pairs]
     print(f'  init_lora={init_lora or "base"}  pairs={len(pairs)}  lr={lr} w_imit={w_imit} epochs={n_epochs} seed={seed}')
 
-    # Held-out eval set (different from training pool)
-    all_kashiwa = []
-    for r in ['kashiwa_route1','kashiwa_route2','kashiwa_route3','kashiwa_route4']:
-        all_kashiwa += sorted(glob.glob(f'/root/autoware_ws/grpo_data/npz_multimap/{r}/*.npz'))
-    random.seed(9999); random.shuffle(all_kashiwa)  # consistent eval set
-    eval_npz = all_kashiwa[:n_eval]
+    # Held-out eval set: STRICTLY disjoint from training pairs (npz-identity based)
+    val_npz_list_path = '/root/corl_work/outputs/npz_val.txt'
+    if os.path.exists(val_npz_list_path):
+        with open(val_npz_list_path) as f:
+            val_npz = [l.strip() for l in f if l.strip()]
+        random.seed(9999); random.shuffle(val_npz)
+        eval_npz = val_npz[:n_eval]
+    else:
+        # legacy fallback (NOT disjoint — only for old runs)
+        all_kashiwa = []
+        for r in ['kashiwa_route1','kashiwa_route2','kashiwa_route3','kashiwa_route4']:
+            all_kashiwa += sorted(glob.glob(f'/root/autoware_ws/grpo_data/npz_multimap/{r}/*.npz'))
+        random.seed(9999); random.shuffle(all_kashiwa)
+        eval_npz = all_kashiwa[:n_eval]
 
     history = []; best_vio = 1.0; best_epoch = -1
     t0 = time.time()
