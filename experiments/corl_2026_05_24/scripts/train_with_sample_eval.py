@@ -64,7 +64,7 @@ def sample_eval(model, cfg, ns_eval, eval_npz):
     }
 
 def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
-          n_eval=30, init_lora=None, seed=42, max_pairs=None):
+          n_eval=30, init_lora=None, seed=42, max_pairs=None, wd=1e-4, schedule='constant', sam=False):
     os.makedirs(out_dir, exist_ok=True)
     torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
     cfg = Config('/root/autoware_data/diffusion_planner/v3.0/diffusion_planner.param.json', guidance_fn=None)
@@ -86,7 +86,17 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
     lora_params = [p for n, p in policy.named_parameters() if any(s in n for s in ['shared_A','shared_B','experts_A','experts_B'])]
     for n, p in policy.named_parameters():
         p.requires_grad_(any(s in n for s in ['shared_A','shared_B','experts_A','experts_B']))
-    opt = torch.optim.AdamW(lora_params, lr=lr, weight_decay=1e-4)
+    opt = torch.optim.AdamW(lora_params, lr=lr, weight_decay=wd)
+    sched = None
+    if schedule == 'cosine':
+        sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=n_epochs * (max_pairs or 1500))
+    sam_outer_opt = None
+    if sam:
+        try:
+            from torch.optim import SGD as _SGD
+        except Exception: pass
+        # Simple SAM: perturb weights with epsilon * grad, recompute loss, step on the perturbed grad
+        # Implemented inline below.
 
     pairs = [json.loads(l) for l in open(pairs_jsonl)]
     if max_pairs: pairs = pairs[:max_pairs]
@@ -124,7 +134,29 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
             loss = (1 - w_imit) * dpo_loss + w_imit * lw
             opt.zero_grad(); loss.backward()
             torch.nn.utils.clip_grad_norm_(lora_params, 1.0)
+            if sam:
+                # SAM: w_t' = w_t + eps * g / ||g||; second forward at w_t'; step using g'
+                with torch.no_grad():
+                    eps_rho = 0.05
+                    grad_norm = torch.norm(torch.stack([p.grad.norm() for p in lora_params if p.grad is not None]) + 1e-12)
+                    for p in lora_params:
+                        if p.grad is None: continue
+                        e = eps_rho * p.grad / (grad_norm + 1e-12)
+                        p.add_(e); p._sam_perturb = e
+                # Recompute loss at perturbed weights
+                lw2 = compute_trajectory_loss(policy, data, chosen, cfg, nw, t)
+                ll2 = compute_trajectory_loss(policy, data, rej, cfg, nl, t)
+                logits2 = -BETA * ((lw2 - lrw) - (ll2 - lrl))
+                loss2 = (1 - w_imit) * (-F.logsigmoid(logits2)) + w_imit * lw2
+                opt.zero_grad(); loss2.backward()
+                # Undo perturbation
+                with torch.no_grad():
+                    for p in lora_params:
+                        if hasattr(p, '_sam_perturb'):
+                            p.sub_(p._sam_perturb); del p._sam_perturb
+                torch.nn.utils.clip_grad_norm_(lora_params, 1.0)
             opt.step()
+            if sched is not None: sched.step()
             ep_l += loss.item(); ep_acc += float(logits.item() > 0); ep_im += lw.item()
         ep_l /= len(pairs); ep_acc /= len(pairs); ep_im /= len(pairs)
 
@@ -165,5 +197,9 @@ if __name__ == '__main__':
     ap.add_argument('--init-lora', default=None)
     ap.add_argument('--seed', type=int, default=42)
     ap.add_argument('--max-pairs', type=int, default=None)
+    ap.add_argument('--wd', type=float, default=1e-4)
+    ap.add_argument('--schedule', choices=['constant','cosine'], default='constant')
+    ap.add_argument('--sam', action='store_true', help='use sharpness-aware minimization')
     a = ap.parse_args()
-    train(a.pairs, a.out_dir, a.lr, a.w_imit, a.epochs, a.eval_every, a.n_eval, a.init_lora, a.seed, a.max_pairs)
+    train(a.pairs, a.out_dir, a.lr, a.w_imit, a.epochs, a.eval_every, a.n_eval, a.init_lora, a.seed, a.max_pairs,
+          wd=a.wd, schedule=a.schedule, sam=a.sam)
