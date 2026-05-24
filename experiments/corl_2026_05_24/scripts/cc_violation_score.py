@@ -122,8 +122,26 @@ def _lateral_acc(ego_xy: list[tuple], ego_v: list[float]) -> list[float]:
     return out
 
 
-def _longitudinal_jerk(ego_v: list[float], dt: float = 0.1) -> list[float]:
-    a = _diff(ego_v)
+def _longitudinal_jerk(ego_v: list[float], dt: float = 0.1, smooth_window: int = 11) -> list[float]:
+    """Compute jerk |dv²/dt²| over a smooth_window-step moving average.
+
+    Raw 10Hz finite-difference jerk is dominated by sampling noise (real human
+    trajectories have median |jerk_raw| ≈ 250 m/s³). To get a comfort-relevant
+    jerk estimate, we first low-pass filter velocity with a moving average,
+    then differentiate twice. smooth_window=5 (=0.5s at 10Hz) keeps the comfort
+    threshold of 5 m/s³ physically meaningful (ISO 2631).
+    """
+    if smooth_window > 1 and len(ego_v) > smooth_window:
+        # moving average smoothing
+        w = smooth_window
+        smoothed = []
+        for i in range(len(ego_v)):
+            lo, hi = max(0, i - w // 2), min(len(ego_v), i + w // 2 + 1)
+            smoothed.append(sum(ego_v[lo:hi]) / (hi - lo))
+        v = smoothed
+    else:
+        v = ego_v
+    a = _diff(v)
     j = _diff(a)
     return [abs(x) / (dt * dt) for x in j]
 
