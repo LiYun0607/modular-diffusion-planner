@@ -1,0 +1,395 @@
+{
+  "mock_base": {
+    "_baseline_no_perturbation": {
+      "mean_violation_rate": 0.4
+    },
+    "drop_p0.10": {
+      "mean_violation_rate": 0.35,
+      "per_trial": [
+        0.3,
+        0.4
+      ]
+    },
+    "drop_p0.20": {
+      "mean_violation_rate": 0.35,
+      "per_trial": [
+        0.3,
+        0.4
+      ]
+    },
+    "drop_p0.30": {
+      "mean_violation_rate": 0.31666666666666665,
+      "per_trial": [
+        0.23333333333333334,
+        0.4
+      ]
+    },
+    "jitter_pos_s0.1m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s0.5m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s1.0m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s0.5mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s1.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s2.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n1": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n2": {
+      "mean_violation_rate": 0.7,
+      "per_trial": [
+        1.0,
+        0.4
+      ]
+    },
+    "fp_objects_n3": {
+      "mean_violation_rate": 0.95,
+      "per_trial": [
+        1.0,
+        0.9
+      ]
+    },
+    "freeze_n1": {
+      "mean_violation_rate": 0.3333333333333333,
+      "per_trial": [
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    "freeze_n3": {
+      "mean_violation_rate": 0.4666666666666667,
+      "per_trial": [
+        0.4666666666666667,
+        0.4666666666666667
+      ]
+    },
+    "freeze_n5": {
+      "mean_violation_rate": 0.36666666666666664,
+      "per_trial": [
+        0.36666666666666664,
+        0.36666666666666664
+      ]
+    },
+    "occlude_front_90": {
+      "mean_violation_rate": 0.3333333333333333,
+      "per_trial": [
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    "combined_low": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "combined_high": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "mock_reward": {
+    "_baseline_no_perturbation": {
+      "mean_violation_rate": 0.6666666666666666
+    },
+    "drop_p0.10": {
+      "mean_violation_rate": 0.6,
+      "per_trial": [
+        0.5333333333333333,
+        0.6666666666666666
+      ]
+    },
+    "drop_p0.20": {
+      "mean_violation_rate": 0.5833333333333333,
+      "per_trial": [
+        0.5333333333333333,
+        0.6333333333333333
+      ]
+    },
+    "drop_p0.30": {
+      "mean_violation_rate": 0.4833333333333333,
+      "per_trial": [
+        0.3333333333333333,
+        0.6333333333333333
+      ]
+    },
+    "jitter_pos_s0.1m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s0.5m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s1.0m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s0.5mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s1.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s2.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n1": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n2": {
+      "mean_violation_rate": 0.8333333333333333,
+      "per_trial": [
+        1.0,
+        0.6666666666666666
+      ]
+    },
+    "fp_objects_n3": {
+      "mean_violation_rate": 0.95,
+      "per_trial": [
+        1.0,
+        0.9
+      ]
+    },
+    "freeze_n1": {
+      "mean_violation_rate": 0.6333333333333333,
+      "per_trial": [
+        0.6333333333333333,
+        0.6333333333333333
+      ]
+    },
+    "freeze_n3": {
+      "mean_violation_rate": 0.6666666666666666,
+      "per_trial": [
+        0.6666666666666666,
+        0.6666666666666666
+      ]
+    },
+    "freeze_n5": {
+      "mean_violation_rate": 0.7333333333333333,
+      "per_trial": [
+        0.7333333333333333,
+        0.7333333333333333
+      ]
+    },
+    "occlude_front_90": {
+      "mean_violation_rate": 0.5666666666666667,
+      "per_trial": [
+        0.5666666666666667,
+        0.5666666666666667
+      ]
+    },
+    "combined_low": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "combined_high": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "mock_real_dpo": {
+    "_baseline_no_perturbation": {
+      "mean_violation_rate": 0.26666666666666666
+    },
+    "drop_p0.10": {
+      "mean_violation_rate": 0.23333333333333334,
+      "per_trial": [
+        0.2,
+        0.26666666666666666
+      ]
+    },
+    "drop_p0.20": {
+      "mean_violation_rate": 0.23333333333333334,
+      "per_trial": [
+        0.2,
+        0.26666666666666666
+      ]
+    },
+    "drop_p0.30": {
+      "mean_violation_rate": 0.2,
+      "per_trial": [
+        0.13333333333333333,
+        0.26666666666666666
+      ]
+    },
+    "jitter_pos_s0.1m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s0.5m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_pos_s1.0m": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s0.5mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s1.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "jitter_vel_s2.0mps": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n1": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "fp_objects_n2": {
+      "mean_violation_rate": 0.6833333333333333,
+      "per_trial": [
+        1.0,
+        0.36666666666666664
+      ]
+    },
+    "fp_objects_n3": {
+      "mean_violation_rate": 0.6833333333333333,
+      "per_trial": [
+        1.0,
+        0.36666666666666664
+      ]
+    },
+    "freeze_n1": {
+      "mean_violation_rate": 0.23333333333333334,
+      "per_trial": [
+        0.23333333333333334,
+        0.23333333333333334
+      ]
+    },
+    "freeze_n3": {
+      "mean_violation_rate": 0.36666666666666664,
+      "per_trial": [
+        0.36666666666666664,
+        0.36666666666666664
+      ]
+    },
+    "freeze_n5": {
+      "mean_violation_rate": 0.3333333333333333,
+      "per_trial": [
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    "occlude_front_90": {
+      "mean_violation_rate": 0.2,
+      "per_trial": [
+        0.2,
+        0.2
+      ]
+    },
+    "combined_low": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    },
+    "combined_high": {
+      "mean_violation_rate": 1.0,
+      "per_trial": [
+        1.0,
+        1.0
+      ]
+    }
+  }
+}
