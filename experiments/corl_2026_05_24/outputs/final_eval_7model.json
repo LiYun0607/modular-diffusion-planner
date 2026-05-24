@@ -1,0 +1,91 @@
+{
+  "base_nolora": {
+    "n": 100,
+    "any_violation": 0.25,
+    "per_criterion": {
+      "jerk": 0.2,
+      "backwards": 0.05
+    },
+    "mean_speed": 3.988590312606547,
+    "jerk_max_p50": 3.239,
+    "jerk_max_p95": 8.7907,
+    "elapsed_sec": 4.114393711090088
+  },
+  "v5_pure": {
+    "n": 100,
+    "any_violation": 1.0,
+    "per_criterion": {
+      "jerk": 1.0,
+      "speed_cap": 0.47,
+      "backwards": 0.05,
+      "lat_acc": 0.01
+    },
+    "mean_speed": 8.143835953914039,
+    "jerk_max_p50": 12.042,
+    "jerk_max_p95": 15.624649999999999,
+    "elapsed_sec": 4.946763277053833
+  },
+  "v5_pure_surgical (zero preproj.fc1)": {
+    "n": 100,
+    "any_violation": 0.55,
+    "per_criterion": {
+      "jerk": 0.55,
+      "backwards": 0.06
+    },
+    "mean_speed": 5.873089349428236,
+    "jerk_max_p50": 5.4085,
+    "jerk_max_p95": 14.056049999999999,
+    "elapsed_sec": 4.897311449050903
+  },
+  "v2_jr_paper": {
+    "n": 100,
+    "any_violation": 1.0,
+    "per_criterion": {
+      "jerk": 1.0,
+      "speed_cap": 0.45,
+      "backwards": 0.05
+    },
+    "mean_speed": 8.091634071871553,
+    "jerk_max_p50": 12.253499999999999,
+    "jerk_max_p95": 16.031200000000002,
+    "elapsed_sec": 4.978985071182251
+  },
+  "real_dpo_v1 (warm-start v5)": {
+    "n": 100,
+    "any_violation": 1.0,
+    "per_criterion": {
+      "lat_acc": 1.0,
+      "jerk": 1.0,
+      "speed_cap": 1.0,
+      "backwards": 1.0,
+      "cold_start": 0.1
+    },
+    "mean_speed": 62.47338527965317,
+    "jerk_max_p50": 38088.488,
+    "jerk_max_p95": 38719.27955,
+    "elapsed_sec": 4.88119649887085
+  },
+  "real_dpo_v2 (from base)": {
+    "n": 100,
+    "any_violation": 1.0,
+    "per_criterion": {
+      "lat_acc": 1.0,
+      "jerk": 1.0,
+      "speed_cap": 1.0,
+      "backwards": 0.98,
+      "cold_start": 0.1
+    },
+    "mean_speed": 20.669297407630403,
+    "jerk_max_p50": 298.26,
+    "jerk_max_p95": 399.05355000000003,
+    "elapsed_sec": 4.914820194244385
+  },
+  "real_dpo_l2_hybrid (w_imit=0.5)": {
+    "name": "real_dpo_l2_hybrid",
+    "n": 100,
+    "any_violation": 0.97,
+    "jerk_max_p50": 35.289,
+    "jerk_max_p95": 89.09904999999999,
+    "mean_speed": 5.014904232425875
+  }
+}
