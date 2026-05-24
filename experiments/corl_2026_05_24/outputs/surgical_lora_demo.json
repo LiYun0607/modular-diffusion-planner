@@ -1,0 +1,30 @@
+{
+  "base (zero all)": {
+    "name": "base (zero all)",
+    "any_violation": 0.22,
+    "per_criterion": {
+      "jerk": 0.22
+    }
+  },
+  "full v5_pure": {
+    "name": "full v5_pure",
+    "any_violation": 0.16,
+    "per_criterion": {
+      "jerk": 0.16
+    }
+  },
+  "v5_zero_preproj_fc1": {
+    "name": "v5_zero_preproj_fc1",
+    "any_violation": 0.22,
+    "per_criterion": {
+      "jerk": 0.22
+    }
+  },
+  "v5_keep_only_preproj_fc1": {
+    "name": "v5_keep_only_preproj_fc1",
+    "any_violation": 0.2,
+    "per_criterion": {
+      "jerk": 0.2
+    }
+  }
+}
