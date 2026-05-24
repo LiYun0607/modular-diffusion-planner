@@ -10,12 +10,13 @@ from diffusion_planner.model.diffusion_planner import Diffusion_Planner
 from diffusion_planner.model.diffusion_utils.sde import VPSDE_linear
 from diffusion_planner.utils.config import Config
 from diffusion_planner.model.diffusion_utils.dpm_solver_pytorch import NoiseScheduleVP
-from train_molora import apply_molora, set_active_expert
+from train_molora import apply_molora, set_active_expert, MoLoRALinear
 from train_reward_backprop import differentiable_dpm_solver_sample
 from utils import load_npz_data
 from cc_violation_score import score_trajectory, CCConfig
 
-DEVICE = torch.device('cuda'); BETA = 0.1
+DEVICE = torch.device('cuda')
+DEFAULT_BETA = 0.1
 
 def compute_trajectory_loss(model, data, traj_array, cfg, noise, t):
     B = data['ego_current_state'].shape[0]; P = 1 + cfg.predicted_neighbor_num; Tf = cfg.future_len
@@ -64,7 +65,8 @@ def sample_eval(model, cfg, ns_eval, eval_npz):
     }
 
 def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
-          n_eval=30, init_lora=None, seed=42, max_pairs=None, wd=1e-4, schedule='constant', sam=False):
+          n_eval=30, init_lora=None, seed=42, max_pairs=None, wd=1e-4, schedule='constant', sam=False,
+          shared_rank=4, expert_rank=8, lora_alpha=32.0, dpo_beta=DEFAULT_BETA, target_modules='all'):
     os.makedirs(out_dir, exist_ok=True)
     torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
     cfg = Config('/root/autoware_data/diffusion_planner/v3.0/diffusion_planner.param.json', guidance_fn=None)
@@ -75,7 +77,21 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
     bsd = bsd.get('model', bsd.get('ema_state_dict', bsd))
     bsd = {k.replace('module.','').replace('_orig_mod.',''): v for k,v in bsd.items()}
     policy.load_state_dict(bsd, strict=False)
-    apply_molora(policy.decoder.dit, n_experts=4, shared_rank=4, expert_rank=8, alpha=32.0)
+    # target_modules: 'all' | 'mlp' | 'preproj' — controls which DiT layers get MoLoRA
+    if target_modules == 'all':
+        apply_molora(policy.decoder.dit, n_experts=4, shared_rank=shared_rank, expert_rank=expert_rank, alpha=lora_alpha)
+    elif target_modules == 'preproj':
+        # only preproj.fc1 + fc2; skip blocks + final_layer
+        policy.decoder.dit.preproj.fc1 = MoLoRALinear(policy.decoder.dit.preproj.fc1, 4, shared_rank, expert_rank, lora_alpha)
+        policy.decoder.dit.preproj.fc2 = MoLoRALinear(policy.decoder.dit.preproj.fc2, 4, shared_rank, expert_rank, lora_alpha)
+    elif target_modules == 'blocks':
+        for blk in policy.decoder.dit.blocks:
+            blk.mlp1.fc1 = MoLoRALinear(blk.mlp1.fc1, 4, shared_rank, expert_rank, lora_alpha)
+            blk.mlp1.fc2 = MoLoRALinear(blk.mlp1.fc2, 4, shared_rank, expert_rank, lora_alpha)
+            blk.mlp2.fc1 = MoLoRALinear(blk.mlp2.fc1, 4, shared_rank, expert_rank, lora_alpha)
+            blk.mlp2.fc2 = MoLoRALinear(blk.mlp2.fc2, 4, shared_rank, expert_rank, lora_alpha)
+    else:
+        apply_molora(policy.decoder.dit, n_experts=4, shared_rank=shared_rank, expert_rank=expert_rank, alpha=lora_alpha)
     policy.to(DEVICE); set_active_expert(policy, 1)
     if init_lora:
         sd = torch.load(init_lora, map_location=DEVICE, weights_only=False)['model']
@@ -129,7 +145,7 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
             with torch.no_grad():
                 lrw = compute_trajectory_loss(reference, data, chosen, cfg, nw.clone(), t)
                 lrl = compute_trajectory_loss(reference, data, rej, cfg, nl.clone(), t)
-            logits = -BETA * ((lw - lrw) - (ll - lrl))
+            logits = -dpo_beta * ((lw - lrw) - (ll - lrl))
             dpo_loss = -F.logsigmoid(logits)
             loss = (1 - w_imit) * dpo_loss + w_imit * lw
             opt.zero_grad(); loss.backward()
@@ -146,7 +162,7 @@ def train(pairs_jsonl, out_dir, lr=3e-5, w_imit=0.5, n_epochs=20, eval_every=5,
                 # Recompute loss at perturbed weights
                 lw2 = compute_trajectory_loss(policy, data, chosen, cfg, nw, t)
                 ll2 = compute_trajectory_loss(policy, data, rej, cfg, nl, t)
-                logits2 = -BETA * ((lw2 - lrw) - (ll2 - lrl))
+                logits2 = -dpo_beta * ((lw2 - lrw) - (ll2 - lrl))
                 loss2 = (1 - w_imit) * (-F.logsigmoid(logits2)) + w_imit * lw2
                 opt.zero_grad(); loss2.backward()
                 # Undo perturbation
@@ -200,6 +216,13 @@ if __name__ == '__main__':
     ap.add_argument('--wd', type=float, default=1e-4)
     ap.add_argument('--schedule', choices=['constant','cosine'], default='constant')
     ap.add_argument('--sam', action='store_true', help='use sharpness-aware minimization')
+    ap.add_argument('--shared-rank', type=int, default=4)
+    ap.add_argument('--expert-rank', type=int, default=8)
+    ap.add_argument('--lora-alpha', type=float, default=32.0)
+    ap.add_argument('--dpo-beta', type=float, default=DEFAULT_BETA)
+    ap.add_argument('--target-modules', choices=['all','preproj','blocks'], default='all')
     a = ap.parse_args()
     train(a.pairs, a.out_dir, a.lr, a.w_imit, a.epochs, a.eval_every, a.n_eval, a.init_lora, a.seed, a.max_pairs,
-          wd=a.wd, schedule=a.schedule, sam=a.sam)
+          wd=a.wd, schedule=a.schedule, sam=a.sam,
+          shared_rank=a.shared_rank, expert_rank=a.expert_rank, lora_alpha=a.lora_alpha,
+          dpo_beta=a.dpo_beta, target_modules=a.target_modules)
