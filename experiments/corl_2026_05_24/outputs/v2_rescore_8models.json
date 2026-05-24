@@ -1,0 +1,362 @@
+{
+  "base_nolora": {
+    "jama_strict": {
+      "vio_rate": 0.06,
+      "per_criterion": {
+        "stuck": 0.01,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 0.817,
+        "max_decel_mps2": 0.492,
+        "max_lat_acc_mps2": 0.132,
+        "max_speed_mps": 5.029
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.06,
+      "per_criterion": {
+        "stuck": 0.01,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 0.817,
+        "max_decel_mps2": 0.492,
+        "max_lat_acc_mps2": 0.132,
+        "max_speed_mps": 5.029
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.06,
+      "per_criterion": {
+        "stuck": 0.01,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 0.817,
+        "max_decel_mps2": 0.492,
+        "max_lat_acc_mps2": 0.132,
+        "max_speed_mps": 5.029
+      }
+    }
+  },
+  "v5_pure": {
+    "jama_strict": {
+      "vio_rate": 0.05,
+      "per_criterion": {
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.676,
+        "max_decel_mps2": 0.248,
+        "max_lat_acc_mps2": 0.742,
+        "max_speed_mps": 17.899
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.53,
+      "per_criterion": {
+        "speed_cap": 0.48,
+        "backwards": 0.05,
+        "jerk": 0.04
+      },
+      "medians": {
+        "max_jerk_mps3": 2.676,
+        "max_decel_mps2": 0.248,
+        "max_lat_acc_mps2": 0.742,
+        "max_speed_mps": 17.899
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.57,
+      "per_criterion": {
+        "speed_cap": 0.48,
+        "jerk": 0.08,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.676,
+        "max_decel_mps2": 0.248,
+        "max_lat_acc_mps2": 0.742,
+        "max_speed_mps": 17.899
+      }
+    }
+  },
+  "v5_surgical": {
+    "jama_strict": {
+      "vio_rate": 0.06,
+      "per_criterion": {
+        "backwards": 0.06
+      },
+      "medians": {
+        "max_jerk_mps3": 2.1550000000000002,
+        "max_decel_mps2": 0.183,
+        "max_lat_acc_mps2": 0.7765,
+        "max_speed_mps": 8.218
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.06,
+      "per_criterion": {
+        "backwards": 0.06,
+        "jerk": 0.04
+      },
+      "medians": {
+        "max_jerk_mps3": 2.1550000000000002,
+        "max_decel_mps2": 0.183,
+        "max_lat_acc_mps2": 0.7765,
+        "max_speed_mps": 8.218
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.09,
+      "per_criterion": {
+        "backwards": 0.06,
+        "jerk": 0.07
+      },
+      "medians": {
+        "max_jerk_mps3": 2.1550000000000002,
+        "max_decel_mps2": 0.183,
+        "max_lat_acc_mps2": 0.7765,
+        "max_speed_mps": 8.218
+      }
+    }
+  },
+  "v2_jr_paper": {
+    "jama_strict": {
+      "vio_rate": 0.05,
+      "per_criterion": {
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.673,
+        "max_decel_mps2": 0.306,
+        "max_lat_acc_mps2": 0.6154999999999999,
+        "max_speed_mps": 17.8095
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.52,
+      "per_criterion": {
+        "speed_cap": 0.47,
+        "backwards": 0.05,
+        "jerk": 0.03
+      },
+      "medians": {
+        "max_jerk_mps3": 2.673,
+        "max_decel_mps2": 0.306,
+        "max_lat_acc_mps2": 0.6154999999999999,
+        "max_speed_mps": 17.8095
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.57,
+      "per_criterion": {
+        "speed_cap": 0.47,
+        "jerk": 0.09,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.673,
+        "max_decel_mps2": 0.306,
+        "max_lat_acc_mps2": 0.6154999999999999,
+        "max_speed_mps": 17.8095
+      }
+    }
+  },
+  "v8_deep_soup": {
+    "jama_strict": {
+      "vio_rate": 0.05,
+      "per_criterion": {
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.7495,
+        "max_decel_mps2": 0.263,
+        "max_lat_acc_mps2": 0.709,
+        "max_speed_mps": 19.119500000000002
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.63,
+      "per_criterion": {
+        "speed_cap": 0.58,
+        "backwards": 0.05,
+        "jerk": 0.04
+      },
+      "medians": {
+        "max_jerk_mps3": 2.7495,
+        "max_decel_mps2": 0.263,
+        "max_lat_acc_mps2": 0.709,
+        "max_speed_mps": 19.119500000000002
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.67,
+      "per_criterion": {
+        "speed_cap": 0.58,
+        "jerk": 0.08,
+        "backwards": 0.05
+      },
+      "medians": {
+        "max_jerk_mps3": 2.7495,
+        "max_decel_mps2": 0.263,
+        "max_lat_acc_mps2": 0.709,
+        "max_speed_mps": 19.119500000000002
+      }
+    }
+  },
+  "real_dpo_v1": {
+    "jama_strict": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "backwards": 1.0,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 12697.7905,
+        "max_decel_mps2": 4930.472,
+        "max_lat_acc_mps2": 3360.476,
+        "max_speed_mps": 850.1759999999999
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "lat_acc": 1.0,
+        "speed_cap": 1.0,
+        "backwards": 1.0,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 12697.7905,
+        "max_decel_mps2": 4930.472,
+        "max_lat_acc_mps2": 3360.476,
+        "max_speed_mps": 850.1759999999999
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "lat_acc": 1.0,
+        "speed_cap": 1.0,
+        "backwards": 1.0,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 12697.7905,
+        "max_decel_mps2": 4930.472,
+        "max_lat_acc_mps2": 3360.476,
+        "max_speed_mps": 850.1759999999999
+      }
+    }
+  },
+  "real_dpo_v2_base": {
+    "jama_strict": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "backwards": 0.98,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 161.5215,
+        "max_decel_mps2": 24.103,
+        "max_lat_acc_mps2": 49.0,
+        "max_speed_mps": 47.4685
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "lat_acc": 1.0,
+        "speed_cap": 1.0,
+        "backwards": 0.98,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 161.5215,
+        "max_decel_mps2": 24.103,
+        "max_lat_acc_mps2": 49.0,
+        "max_speed_mps": 47.4685
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 1.0,
+      "per_criterion": {
+        "decel_too_hard": 1.0,
+        "jerk": 1.0,
+        "lat_acc": 1.0,
+        "speed_cap": 1.0,
+        "backwards": 0.98,
+        "cold_start": 0.1
+      },
+      "medians": {
+        "max_jerk_mps3": 161.5215,
+        "max_decel_mps2": 24.103,
+        "max_lat_acc_mps2": 49.0,
+        "max_speed_mps": 47.4685
+      }
+    }
+  },
+  "real_dpo_l2_hybrid": {
+    "jama_strict": {
+      "vio_rate": 0.3,
+      "per_criterion": {
+        "decel_too_hard": 0.1,
+        "jerk": 0.12,
+        "cold_start": 0.1,
+        "backwards": 0.08
+      },
+      "medians": {
+        "max_jerk_mps3": 5.836,
+        "max_decel_mps2": 3.255,
+        "max_lat_acc_mps2": 1.2415,
+        "max_speed_mps": 9.814499999999999
+      }
+    },
+    "jama_inspired": {
+      "vio_rate": 0.5,
+      "per_criterion": {
+        "jerk": 0.39,
+        "decel_too_hard": 0.1,
+        "cold_start": 0.1,
+        "backwards": 0.08,
+        "lat_acc": 0.07,
+        "speed_cap": 0.04
+      },
+      "medians": {
+        "max_jerk_mps3": 5.836,
+        "max_decel_mps2": 3.255,
+        "max_lat_acc_mps2": 1.2415,
+        "max_speed_mps": 9.814499999999999
+      }
+    },
+    "comfort_lit": {
+      "vio_rate": 0.64,
+      "per_criterion": {
+        "jerk": 0.61,
+        "decel_too_hard": 0.1,
+        "cold_start": 0.1,
+        "backwards": 0.08,
+        "lat_acc": 0.07,
+        "speed_cap": 0.04
+      },
+      "medians": {
+        "max_jerk_mps3": 5.836,
+        "max_decel_mps2": 3.255,
+        "max_lat_acc_mps2": 1.2415,
+        "max_speed_mps": 9.814499999999999
+      }
+    }
+  }
+}

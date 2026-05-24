@@ -13,7 +13,7 @@ from diffusion_planner.model.diffusion_utils.dpm_solver_pytorch import NoiseSche
 from train_molora import apply_molora, set_active_expert, MoLoRALinear
 from train_reward_backprop import differentiable_dpm_solver_sample
 from utils import load_npz_data
-from cc_violation_score import score_trajectory, CCConfig
+from cc_violation_score_v2 import score_trajectory_v2 as score_trajectory, CCConfigV2 as CCConfig
 
 DEVICE = torch.device('cuda')
 DEFAULT_BETA = 0.1
@@ -41,7 +41,7 @@ def compute_trajectory_loss(model, data, traj_array, cfg, noise, t):
 
 def sample_eval(model, cfg, ns_eval, eval_npz):
     """Sample N trajectories from model, return C&C metrics."""
-    cc_cfg = CCConfig()
+    cc_cfg = CCConfig.for_mode('jama_inspired')
     n_vio = 0; jerks = []; speeds = []
     for p in eval_npz:
         data = load_npz_data(p, DEVICE)
@@ -54,12 +54,12 @@ def sample_eval(model, cfg, ns_eval, eval_npz):
         for j in range(1, len(traj)):
             v.append(float(math.hypot(traj[j,0]-traj[j-1,0], traj[j,1]-traj[j-1,1]))*10)
         speeds.append(float(np.mean(v)))
-        sc = score_trajectory(ego_xy=xy, ego_v=v, ego_v0=v0, dt=0.1, cfg=cc_cfg)
-        jerks.append(sc['details']['jerk_max'])
+        sc = score_trajectory(ego_xy=xy, ego_v_provided=v, ego_v0=v0, dt=0.1, cfg=cc_cfg)
+        jerks.append(sc['details']['max_jerk_mps3'])
         if sc['violation']: n_vio += 1
     return {
         'vio_rate': n_vio / len(eval_npz),
-        'jerk_p50': float(np.median(jerks)),
+        'jerk_p50': float(np.median(jerks)),  # jerks list now uses v2 'max_jerk_mps3'
         'jerk_p95': float(np.percentile(jerks, 95)),
         'mean_speed': float(np.mean(speeds)),
     }
