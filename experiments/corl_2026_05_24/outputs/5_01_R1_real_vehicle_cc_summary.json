@@ -1,0 +1,74 @@
+{
+  "R1_rep1_baseline": {
+    "bag_level": {
+      "n_frames": 27154,
+      "mean_ego_v_mps": 1.258,
+      "max_ego_v_mps": 6.825,
+      "fraction_stationary": 0.568,
+      "xy_span_m": 121.87,
+      "deployment_progress_failure": false
+    },
+    "n_frames": 27154,
+    "cc_pass_rate": 0.28887088458422333,
+    "cc_per_criterion_rate": {
+      "lat_acc": 0.0,
+      "jerk": 0.7110554614421448,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0,
+      "stuck": 0.0032039478529866687
+    }
+  },
+  "R1_rep1_kashiwa_selora": {
+    "bag_level": {
+      "n_frames": 14275,
+      "mean_ego_v_mps": 2.349,
+      "max_ego_v_mps": 6.26,
+      "fraction_stationary": 0.399,
+      "xy_span_m": 107.28,
+      "deployment_progress_failure": false
+    },
+    "n_frames": 14275,
+    "cc_pass_rate": 0.3630122591943958,
+    "cc_per_criterion_rate": {
+      "lat_acc": 0.0,
+      "jerk": 0.6369877408056042,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0,
+      "stuck": 0.0
+    }
+  },
+  "R1_rep2_kashiwa_selora": {
+    "bag_level": {
+      "n_frames": 15755,
+      "mean_ego_v_mps": 0.23,
+      "max_ego_v_mps": 0.23,
+      "fraction_stationary": 1.0,
+      "xy_span_m": 72.43,
+      "deployment_progress_failure": true
+    },
+    "n_frames": 15755,
+    "cc_pass_rate": 1.0,
+    "cc_per_criterion_rate": {
+      "lat_acc": 0.0,
+      "jerk": 0.0,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0,
+      "stuck": 0.0
+    }
+  }
+}

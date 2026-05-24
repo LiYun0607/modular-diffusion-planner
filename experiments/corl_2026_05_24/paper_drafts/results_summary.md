@@ -109,6 +109,46 @@ This is the failure-rate vs. quality-when-it-works trade-off that
 deployment safety analysis MUST address. The mean violation rate is
 misleading; the failure mode is bimodal.
 
+## R.5.1 Real-Vehicle Ego Trajectory C&C Scoring (2026-05-01 R1)
+
+**Source.** Three real-vehicle ROS bags extracted via
+`extract_real_ego_trajectories.py` from
+`/Pixkit/field_data/2026-05-01/R1_rep{1,2}_{baseline,kashiwa_selora}`.
+For each frame, we slice the next 8s of `/localization/kinematic_state`
+into an 80-point ego-frame trajectory and apply `cc_violation_score`.
+We additionally compute `bag_level_progress_summary` (mean ego speed,
+fraction-stationary, total XY span, deployment_progress_failure).
+
+| Bag | n_frames | C&C pass | Jerk vio | Mean v | Stationary | XY span | Deployment failure? |
+|---|---|---|---|---|---|---|---|
+| baseline (rep1)       | 27,154 | 28.9% | 71.1% | 1.26 m/s | 56.8% | 121.9 m | ✓ OK |
+| SE-LoRA (rep1) | 14,275 | 36.3% | 63.7% | 2.35 m/s | 39.9% | 107.3 m | ✓ OK |
+| SE-LoRA (rep2) | 15,755 | **100.0%** | 0.0% | **0.23 m/s** | **100%** | 72.4 m | **🚨 FAILURE** |
+
+**Critical finding: bimodal LoRA deployment failure.**
+
+- **SE-LoRA rep1 outperforms baseline on C&C** (36.3% vs 28.9% pass),
+  drives at higher mean speed (2.35 vs 1.26 m/s), and has lower jerk
+  violation rate (63.7% vs 71.1%) — confirming the "SE-LoRA is smoother
+  when it works" observation from fig4_accel_jerk.png.
+- **SE-LoRA rep2 trivially passes C&C at 100%** because the vehicle
+  barely moved (mean speed 0.23 m/s, 100% stationary). The per-frame
+  C&C check by itself cannot distinguish "safe driving" from "complete
+  deployment failure" — both produce zero violations.
+
+**Methodological implication for §5.X.** The C&C scorer must be paired
+with a bag-level deployment-progress check (we add
+`bag_level_progress_summary`). The combined metric correctly identifies
+rep2 as failure while preserving the per-frame C&C signal for rep1 and
+baseline. The bag-level check fires when:
+
+  fraction_stationary ≥ 95% AND mean_v < 0.5 m/s AND n_frames ≥ 300 (≥ 30s)
+
+**§6.2 paper-figure source.** The figure
+`5_01_R1_bimodal_failure_paper_fig.png` shows the bimodal failure pattern
+in three panels (C&C pass rate, jerk violation, mean speed) — produced
+from the per-bag JSONL extracts. This is the headline §6.2 figure.
+
 ## R.7 Deployment-Side ONNX Fragility (2026-05-21 sanity_v3)
 
 While extracting trajectories from the 5-21 `offline_ab_sanity_v3` set,

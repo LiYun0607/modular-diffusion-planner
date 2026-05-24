@@ -83,6 +83,19 @@ class CCConfig:
     stop_required_distance_m: float = 5.0
     stop_required_terminal_speed_mps: float = 1.0
 
+    # Stuck-failure: planner predicts (near-)zero forward progress over horizon.
+    # Distinct from intentional stop (handled by stop_required) — this catches
+    # the "vehicle physically can't move" deployment failure (e.g., R1_rep2_selora,
+    # where the vehicle creeps at 0.23 m/s for the entire test). C&C-driver
+    # would not silently fail to make progress when path is clear.
+    # NOTE: only meaningful if combined with "intent to move" — when called on
+    # the real ego trajectory, set check_stuck=False if ego is at an
+    # intersection-stop or in heavy traffic. Default ON for the synthetic /
+    # garage / clear-path case.
+    stuck_progress_max_m: float = 2.0  # horizon-end displacement from start
+    stuck_max_speed_mps: float = 0.5    # AND max speed never exceeded this
+    stuck_check_horizon_sec: float = 4.0  # check the first stuck_check_horizon_sec only
+
 
 def _diff(a: list[float]) -> list[float]:
     return [a[i+1] - a[i] for i in range(len(a)-1)]
@@ -224,6 +237,23 @@ def score_trajectory(
             if ego_v[-1] > cfg.stop_required_terminal_speed_mps:
                 stop_required_miss = True
 
+    # stuck-failure: low progress AND low max speed across check horizon.
+    # Catches the "vehicle physically can't move" deployment failure (rep2 case).
+    # GUARDED: only fires when ego was *already moving* (ego_v0 above threshold) —
+    # otherwise legitimate intersection stops (real ego at v=0 waiting for signal)
+    # would all be flagged. Cannot detect rep2-style failures per-frame from this
+    # check alone; use bag_level_progress_summary() for fleet-level detection.
+    stuck = False
+    if ego_v0 is not None and ego_v0 > cfg.stuck_max_speed_mps:
+        n_check = min(int(cfg.stuck_check_horizon_sec / dt), len(ego_xy))
+        if n_check >= 2:
+            x0, y0 = ego_xy[0][0], ego_xy[0][1]
+            x_end, y_end = ego_xy[n_check - 1][0], ego_xy[n_check - 1][1]
+            progress = math.hypot(x_end - x0, y_end - y0)
+            peak_v = max(ego_v[:n_check])
+            if progress < cfg.stuck_progress_max_m and peak_v < cfg.stuck_max_speed_mps:
+                stuck = True
+
     max_lat = max(lat_acc) if lat_acc else 0.0
     max_jerk = max(jerk) if jerk else 0.0
     max_speed = max(ego_v) if ego_v else 0.0
@@ -240,6 +270,7 @@ def score_trajectory(
         'cold_start':    cold_start,
         'backwards':     backwards,
         'stop_required': stop_required_miss,
+        'stuck':         stuck,
     }
     details = {
         'lat_acc_max':       round(max_lat, 3),
@@ -293,6 +324,46 @@ def score_batch(trajectories: Iterable[dict], cfg: CCConfig | None = None) -> di
         'config': asdict(cfg),
     }
     return out
+
+
+def bag_level_progress_summary(records: list[dict]) -> dict:
+    """Aggregate ego-trajectory records (from extract_real_ego_trajectories.py
+    output) into a bag-level deployment-progress signature.
+
+    Catches the rep2-style failure where every per-frame metric is "safe" but
+    the bag-level behavior is "vehicle never moved meaningfully".
+
+    Each record should have keys: ego_v_now, ego_xy_now_map (x, y, yaw).
+
+    Returns:
+      n_frames, mean_ego_v, max_ego_v, fraction_stationary (v<0.5),
+      xy_span_m, deployment_progress_failure (bool: span<10m AND mean_v<0.5
+      over ≥30s of recording)
+    """
+    if not records:
+        return {'n_frames': 0, 'deployment_progress_failure': False}
+    speeds = [r.get('ego_v_now', 0.0) for r in records]
+    xs = [r['ego_xy_now_map'][0] for r in records if 'ego_xy_now_map' in r]
+    ys = [r['ego_xy_now_map'][1] for r in records if 'ego_xy_now_map' in r]
+    n = len(records)
+    mean_v = sum(speeds) / n
+    max_v = max(speeds)
+    frac_stat = sum(1 for v in speeds if v < 0.5) / n
+    span = (math.hypot(max(xs) - min(xs), max(ys) - min(ys))
+            if xs and len(xs) >= 2 else 0.0)
+    # Deployment-progress failure: vehicle effectively didn't drive.
+    # Heuristic: ≥95% of frames stationary AND mean speed < 0.5 m/s,
+    # AND duration >= 30s (n >= 300 at 10 Hz to avoid false flag on short tests).
+    # Tolerates slow drift (rep2 had 72m span but 100% stationary at 0.23 m/s).
+    deployment_failure = (frac_stat >= 0.95 and mean_v < 0.5 and n >= 300)
+    return {
+        'n_frames': n,
+        'mean_ego_v_mps': round(mean_v, 3),
+        'max_ego_v_mps': round(max_v, 3),
+        'fraction_stationary': round(frac_stat, 3),
+        'xy_span_m': round(span, 2),
+        'deployment_progress_failure': bool(deployment_failure),
+    }
 
 
 def load_trajectories_jsonl(path: str | Path) -> Iterator[dict]:
