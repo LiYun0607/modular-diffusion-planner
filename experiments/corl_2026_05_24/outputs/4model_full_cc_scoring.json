@@ -1,0 +1,122 @@
+{
+  "base_nolora": {
+    "n_frames": 3021,
+    "any_violation_rate": 0.16451506123800066,
+    "per_criterion_rate": {
+      "lat_acc": 0.012247600132406488,
+      "jerk": 0.16451506123800066,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0
+    },
+    "details_p95": {
+      "lat_acc_max": 0.044,
+      "jerk_max": 6.902,
+      "speed_max": 1.962,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0,
+      "min_ttc": null
+    },
+    "details_mean": {
+      "lat_acc_max": 0.22368454154252312,
+      "jerk_max": 3.235687851704727,
+      "speed_max": 0.4105431976166894,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0
+    }
+  },
+  "kashiwa_alone": {
+    "n_frames": 3010,
+    "any_violation_rate": 0.1744186046511628,
+    "per_criterion_rate": {
+      "lat_acc": 0.011295681063122924,
+      "jerk": 0.1744186046511628,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0
+    },
+    "details_p95": {
+      "lat_acc_max": 0.077,
+      "jerk_max": 7.098,
+      "speed_max": 2.296,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0,
+      "min_ttc": null
+    },
+    "details_mean": {
+      "lat_acc_max": 0.18420498338869182,
+      "jerk_max": 3.4466794019933578,
+      "speed_max": 0.4252754152824026,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0
+    }
+  },
+  "joint_replay": {
+    "n_frames": 2851,
+    "any_violation_rate": 0.175377060680463,
+    "per_criterion_rate": {
+      "lat_acc": 0.011574886004910558,
+      "jerk": 0.175377060680463,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0
+    },
+    "details_p95": {
+      "lat_acc_max": 0.082,
+      "jerk_max": 7.251,
+      "speed_max": 2.361,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0,
+      "min_ttc": null
+    },
+    "details_mean": {
+      "lat_acc_max": 0.17981690634864206,
+      "jerk_max": 3.471898982813057,
+      "speed_max": 0.4374103823220026,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0
+    }
+  },
+  "shared_only": {
+    "n_frames": 2977,
+    "any_violation_rate": 0.17131340275445078,
+    "per_criterion_rate": {
+      "lat_acc": 0.012428619415518979,
+      "jerk": 0.17131340275445078,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0
+    },
+    "details_p95": {
+      "lat_acc_max": 0.082,
+      "jerk_max": 7.237,
+      "speed_max": 2.367,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0,
+      "min_ttc": null
+    },
+    "details_mean": {
+      "lat_acc_max": 0.34361437688947305,
+      "jerk_max": 3.348337588176013,
+      "speed_max": 0.4212747732616812,
+      "route_dev_max": 0.0,
+      "heading_err_max": 0.0
+    }
+  }
+}

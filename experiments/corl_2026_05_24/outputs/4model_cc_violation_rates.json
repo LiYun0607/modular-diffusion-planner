@@ -1,0 +1,26 @@
+{
+  "base_nolora": {
+    "n_frames": 2977,
+    "route_dev_violation_rate": 0.0,
+    "traj_divergence_violation_rate": 0.0053745381256298285,
+    "any_violation_rate": 0.0053745381256298285
+  },
+  "joint_replay": {
+    "n_frames": 3021,
+    "route_dev_violation_rate": 0.0,
+    "traj_divergence_violation_rate": 0.0,
+    "any_violation_rate": 0.0
+  },
+  "kashiwa_alone": {
+    "n_frames": 3010,
+    "route_dev_violation_rate": 0.0,
+    "traj_divergence_violation_rate": 0.0069767441860465115,
+    "any_violation_rate": 0.0069767441860465115
+  },
+  "shared_only": {
+    "n_frames": 2851,
+    "route_dev_violation_rate": 0.0,
+    "traj_divergence_violation_rate": 0.0,
+    "any_violation_rate": 0.0
+  }
+}
