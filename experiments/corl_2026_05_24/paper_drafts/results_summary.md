@@ -109,6 +109,33 @@ This is the failure-rate vs. quality-when-it-works trade-off that
 deployment safety analysis MUST address. The mean violation rate is
 misleading; the failure mode is bimodal.
 
+## R.7 Deployment-Side ONNX Fragility (2026-05-21 sanity_v3)
+
+While extracting trajectories from the 5-21 `offline_ab_sanity_v3` set,
+the `kashiwa_selora` planner crashed mid-replay with the following ONNX
+shape mismatch, producing 0 trajectory messages over the entire 5-min
+bag:
+
+```
+[DiffusionPlanner] Error during planning: Got invalid dimensions for
+input: context_embedding for the following indices
+ index: 1 Got: 226 Expected: 1
+[Encoder] Context embedding cached: 57856 elements [1,226,256], pooled: 256
+```
+
+Followed by `CUDA failure 719: unspecified launch failure` and process
+termination (exit code -6). The baseline (no-LoRA) planner replayed the
+same bag successfully (3,022 frames).
+
+**Implication for §A appendix.** The ONNX export pipeline that produces
+the deployable artifacts has a silent shape-mismatch bug: certain LoRA
+checkpoints, after export, produce encoder output `[1, 226, 256]` while
+the DiT expects pre-pooled `[1, 1, 256]`. This is independent of the LoRA
+training-time behavior but matters for paper §5 (system) — deployment
+fragility is a distinct failure mode from model fragility, and our
+results in §6 isolate the latter by using only successfully-replaying
+runs. We document this explicitly to avoid attribution confusion.
+
 ## R.6 Provisional Methods Result (TBD — implementation complete, training pending)
 
 The methods of §7 are implemented at the algorithmic level

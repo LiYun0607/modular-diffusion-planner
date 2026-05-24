@@ -1,0 +1,22 @@
+{
+  "baseline_traj": {
+    "n_frames": 3022,
+    "any_violation_rate": 0.171409662475182,
+    "per_criterion_rate": {
+      "lat_acc": 0.01257445400397088,
+      "jerk": 0.171409662475182,
+      "speed_cap": 0.0,
+      "route_dev": 0.0,
+      "heading_err": 0.0,
+      "ttc": 0.0,
+      "cold_start": 0.0,
+      "backwards": 0.0,
+      "stop_required": 0.0
+    }
+  },
+  "kashiwa_selora_traj": {
+    "n_frames": 0,
+    "any_violation_rate": 0.0,
+    "per_criterion_rate": {}
+  }
+}
