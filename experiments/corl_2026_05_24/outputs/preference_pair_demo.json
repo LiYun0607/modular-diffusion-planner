@@ -1,0 +1,78 @@
+{
+  "total": 200,
+  "accepted": 187,
+  "chosen_clean": 187,
+  "rejected_violating": 200,
+  "sample_records": [
+    {
+      "ts_npz": "kashiwa_route1_0000000000000096.npz",
+      "chosen_meta": {
+        "clean": true,
+        "n_vio": 0
+      },
+      "rejected_meta": {
+        "n_vio": 2,
+        "bits": [
+          "speed_cap",
+          "cold_start"
+        ]
+      }
+    },
+    {
+      "ts_npz": "kashiwa_route1_0000000000000960.npz",
+      "chosen_meta": {
+        "clean": true,
+        "n_vio": 0
+      },
+      "rejected_meta": {
+        "n_vio": 2,
+        "bits": [
+          "speed_cap",
+          "cold_start"
+        ]
+      }
+    },
+    {
+      "ts_npz": "kashiwa_route1_0000000000000423.npz",
+      "chosen_meta": {
+        "clean": true,
+        "n_vio": 0
+      },
+      "rejected_meta": {
+        "n_vio": 2,
+        "bits": [
+          "speed_cap",
+          "cold_start"
+        ]
+      }
+    },
+    {
+      "ts_npz": "kashiwa_route3_0000000000000678.npz",
+      "chosen_meta": {
+        "clean": true,
+        "n_vio": 0
+      },
+      "rejected_meta": {
+        "n_vio": 2,
+        "bits": [
+          "speed_cap",
+          "cold_start"
+        ]
+      }
+    },
+    {
+      "ts_npz": "kashiwa_route2_0000000000000154.npz",
+      "chosen_meta": {
+        "clean": true,
+        "n_vio": 0
+      },
+      "rejected_meta": {
+        "n_vio": 2,
+        "bits": [
+          "speed_cap",
+          "cold_start"
+        ]
+      }
+    }
+  ]
+}
