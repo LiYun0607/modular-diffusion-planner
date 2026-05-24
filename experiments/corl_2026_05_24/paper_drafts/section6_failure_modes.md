@@ -50,6 +50,27 @@ rate across ALL four models indicates predicted trajectory smoothness
 limitations independent of fine-tuning — addressed by downstream
 trajectory_optimizer in deployment.
 
+## 6.1.1 Offline vs closed-loop divergence (critical caveat)
+
+Offline replay of the 2026-05-01 R1 bag through `pixkit_baseline` and
+`pixkit_kashiwa_selora` produces nearly-overlapping distributions of route
+deviation, ego jerk RMS, and ego speed (N=11,696 and N=17,270 frames
+respectively; see Fig 6.1.1 = `expE_distributions.png`). The per-frame
+paired trajectory L2 distance has median 3.66 m but **p95 22.79 m** and a
+heavy tail to 30 m.
+
+**Implication.**
+> Predicted-trajectory distributions are similar in offline replay, but
+> closed-loop deployment trajectories diverge dramatically because the
+> closed-loop state evolves under the planner's own commands.
+
+This explains why a pure "sim eval" measurement misses the failure modes
+exposed by real-vehicle closed-loop: in sim or offline replay both planners
+get the same input, but the deployed planner shifts the state distribution
+it sees. The 5% tail of 22+ m trajectory divergence in offline replay is
+the leading indicator that closed-loop will amplify into bimodal failure
+(R.4 below).
+
 ## 6.2 Sim-real reward inconsistency
 
 **Observation.** In 2026-05-01 real-vehicle deployment of `base_nolora` vs
@@ -73,6 +94,30 @@ reward with a real-vehicle DPO objective.
 [FIGURE 6.2.1: sim_vs_real_ego_vx.png — sim closed-loop distribution vs real]
 [FIGURE 6.2.2: fig2_speed_vs_time.png — three reps showing rep2 catastrophic failure]
 [FIGURE 6.2.3: fig1_xy_path.png — rep2 deviated 130m west before stopping]
+
+## 6.2.1 Localization confound (honest framing)
+
+When examining SE-LoRA rep2's catastrophic failure, the localization
+NDT scan-matching delay grew from a steady 0.3 s (nominal) to 12.2 s at
+the moment the vehicle stopped, and the localization uncertainty
+ellipse long-axis grew exponentially from ~1×10⁶ m to ~5×10⁶ m over
+~300 s (see Fig 6.2.4 = `fig5_localization.png`).
+
+**Honest framing.** It is unclear whether the SE-LoRA planner's anomalous
+trajectory output induced the localization breakdown (by commanding the
+vehicle into a state the NDT couldn't track) or whether the localization
+broke down for independent reasons (e.g., GPS dropout in the test area)
+and the planner subsequently failed because its inputs were corrupted.
+
+We report this confound openly: "real-vehicle failure analysis must
+account for the multi-component nature of the AD stack; isolating
+planner-only failure modes requires synthetic-perception replays which we
+use for offline evaluation, while real-vehicle results necessarily co-mix
+planner and other failure sources."
+
+This actually motivates §7.1: Real-DPO LoRA is trained on the REAL closed-
+loop trajectories — so any localization-induced behavior is captured in
+the training signal as a "rejected" outcome, regardless of root cause.
 
 ## 6.3 Single-ODD vs cross-region pollution
 
