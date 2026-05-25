@@ -1,0 +1,50 @@
+Modular Diffusion Planner — v2.0 split weights (ITSC 2026)
+============================================================
+
+Release  : v1.0-itsc2026
+Paper    : Li, Thompson, Zhang, Javanmardi, Tsukada,
+           "An Open-Source Modular Benchmark for Diffusion-Based Motion
+            Planning in Closed-Loop Autonomous Driving", IEEE ITSC 2026.
+Repo     : https://github.com/LiYun0607/modular-diffusion-planner
+
+Contents
+--------
+context_encoder_v2.onnx          18 MB   3,417 ONNX nodes
+    Inputs : ego_current_state, ego_agent_past, neighbor_agents_past,
+             goal_pose, lanes, route_lanes, lanes_speed_limit,
+             lanes_has_speed_limit, traffic_light_encoding
+    Output : context_embedding  [226, B, 256]
+    Runs   : once per planning cycle (cached across denoising steps)
+
+dit_core.onnx                    28 MB   13,607 ONNX nodes
+    Inputs : context_embedding, timestep, sampled_trajectories
+    Output : dit_prediction
+    Runs   : N times per cycle inside the C++ DPM-Solver++ loop
+
+turn_indicator_calculator.onnx   5.6 KB
+    Small head that decodes turn-indicator state; loaded by the
+    turn_indicator_manager post-processor.
+
+Provenance
+----------
+Source model    : ~/autoware_data/diffusion_planner/v2.0/diffusion_planner.onnx
+                  (download via Autoware's setup-dev-env.sh)
+Splitting tool  : scripts/onnx_split/graphsurgeon_split.py from the repo above
+Split timestamp : 2026-02-10 (used for the ITSC 2026 submission)
+Numerical check : max error vs monolithic baseline < 1e-5
+
+Reproduction
+------------
+    pip install onnx onnx-graphsurgeon
+    export DIFFUSION_PLANNER_MODEL_DIR=~/autoware_data/diffusion_planner/v2.0
+    python scripts/onnx_split/graphsurgeon_split.py
+
+Verifying these downloads
+-------------------------
+    sha256sum -c SHA256SUMS
+
+License
+-------
+Apache License 2.0. Original ONNX model weights © TIER IV, Inc.
+This redistribution adds no new weights — it only re-packages the same
+parameters into three separately invocable ONNX graphs.

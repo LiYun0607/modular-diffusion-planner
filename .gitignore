@@ -25,6 +25,8 @@ Thumbs.db
 *.engine
 *.trt
 *.plan
+# ...except the paper-version split weights bundled under weights/
+!weights/**/*.onnx
 
 # Frame dumps and per-run logs
 frame_*.bin

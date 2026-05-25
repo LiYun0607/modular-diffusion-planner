@@ -32,6 +32,12 @@ itsc2026-release/
 ├── scripts/onnx_split/                # GraphSurgeon scripts to split monolithic ONNX
 │   ├── graphsurgeon_split.py          #   produces context_encoder.onnx + dit_core.onnx
 │   └── analyze_onnx_split.py          #   inspects graph to find cut point
+├── weights/v2.0/                      # Paper-version split ONNX weights (46 MB)
+│   ├── context_encoder_v2.onnx        #   3,417 nodes, 18 MB
+│   ├── dit_core.onnx                  #   13,607 nodes, 28 MB
+│   ├── turn_indicator_calculator.onnx #   5.6 KB
+│   ├── SHA256SUMS
+│   └── MODEL_INFO.txt
 ├── patches/                           # Diff against upstream autowarefoundation/autoware_universe
 │   └── modular_planner_vs_upstream.patch
 ├── benchmarks/                        # Offline benchmark + figure scripts
@@ -78,8 +84,15 @@ python scripts/onnx_split/graphsurgeon_split.py
 ```
 
 See [`scripts/onnx_split/README.md`](scripts/onnx_split/README.md) for details
-and `--help` for all options. Pre-split weights for the version used in the
-paper are attached to the GitHub Release (TODO: upload).
+and `--help` for all options.
+
+**Pre-split weights for the version used in the paper** are bundled under
+[`weights/v2.0/`](weights/v2.0/) so you can run the benchmarks without
+redoing the split. Verify after clone:
+
+```bash
+cd weights/v2.0 && sha256sum -c SHA256SUMS
+```
 
 ### 2. Launch in AWSIM
 
