@@ -2,7 +2,8 @@
 
 > An Open-Source Modular Benchmark for Diffusion-Based Motion Planning in Closed-Loop Autonomous Driving
 >
-> Li Yun, Simon Thompson, Yidu Zhang, Ehsan Javanmardi, Manabu Tsukada
+> Yun Li, Simon Thompson, Zifan Zeng, Qunli Zhang, Shiming Liu,
+> Peng Wang, Yidu Zhang, Ehsan Javanmardi, Manabu Tsukada
 >
 > *IEEE International Conference on Intelligent Transportation Systems (ITSC) 2026*
 
@@ -159,7 +160,7 @@ the planner in debug mode (see
 ```bibtex
 @inproceedings{li2026modular,
   title     = {An Open-Source Modular Benchmark for Diffusion-Based Motion Planning in Closed-Loop Autonomous Driving},
-  author    = {Li, Yun and Thompson, Simon and Zhang, Yidu and Javanmardi, Ehsan and Tsukada, Manabu},
+  author    = {Li, Yun and Thompson, Simon and Zeng, Zifan and Zhang, Qunli and Liu, Shiming and Wang, Peng and Zhang, Yidu and Javanmardi, Ehsan and Tsukada, Manabu},
   booktitle = {2026 IEEE International Conference on Intelligent Transportation Systems (ITSC)},
   year      = {2026}
 }
