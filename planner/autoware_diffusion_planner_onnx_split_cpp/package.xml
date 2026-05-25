@@ -12,7 +12,7 @@
     - VP continuous noise schedule
     - ONNX Runtime for inference
   </description>
-  <maintainer email="liyunnagoya123@email.com">Yun Li</maintainer>
+  <maintainer email="liyunnagoya123@gmail.com">Yun Li</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
