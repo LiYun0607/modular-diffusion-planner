@@ -26,9 +26,13 @@ N ∈ {3, 5, 7, 10, 15, 20} denoising steps in closed-loop AWSIM simulation.
 
 ```
 itsc2026-release/
-├── planner/                           # ROS 2 C++ package (modular planner)
-│   └── autoware_diffusion_planner/    #   - inference/ : split-ONNX + DPM-Solver++ in C++
-│                                      #   - postprocessing/turn_indicator_manager
+├── planner/                                       # Two ROS 2 C++ packages
+│   ├── autoware_diffusion_planner_onnx_split_cpp/ # **Algorithm 1 reference impl**
+│   │                                              #   - DPM-Solver++ (order 1, 2) in C++
+│   │                                              #   - Encoder caching, VP schedule
+│   │                                              #   - Anytime denoising support
+│   └── autoware_diffusion_planner/                # Upstream-Autoware integration fork
+│                                                  #   (monolithic ONNX, for comparison)
 ├── scripts/onnx_split/                # GraphSurgeon scripts to split monolithic ONNX
 │   ├── graphsurgeon_split.py          #   produces context_encoder.onnx + dit_core.onnx
 │   └── analyze_onnx_split.py          #   inspects graph to find cut point
@@ -53,13 +57,21 @@ itsc2026-release/
 
 ### 1. Build the ROS 2 node
 
-The package lives at `planner/autoware_diffusion_planner` and depends on
-the Autoware Universe stack. Drop it into your Autoware workspace under
-`src/universe/autoware_universe/planning/` and build:
+The repository ships **two** ROS 2 packages under `planner/`:
+
+| Package | Role |
+|---|---|
+| `autoware_diffusion_planner_onnx_split_cpp` | **The Algorithm 1 reference implementation** — split ONNX + native C++ DPM-Solver++ + encoder caching. This is what the paper benchmarks. |
+| `autoware_diffusion_planner` | Upstream Tier4 ROS package consuming the monolithic ONNX. Bundled for Autoware-integration reference and as the *monolithic baseline* in our benchmarks. |
+
+Copy both packages into your Autoware workspace under
+`src/` (or `src/universe/autoware_universe/planning/` for the upstream one) and build:
 
 ```bash
 cd ~/autoware_ws
-colcon build --packages-select autoware_diffusion_planner
+colcon build --packages-select \
+    autoware_diffusion_planner_onnx_split_cpp \
+    autoware_diffusion_planner
 source install/setup.bash
 ```
 
@@ -103,8 +115,14 @@ ros2 launch autoware_launch planning_simulator.launch.xml \
     sensor_model:=sample_sensor_kit
 ```
 
+Or launch the modular node directly:
+
+```bash
+ros2 launch autoware_diffusion_planner_onnx_split_cpp diffusion_planner_onnx_split.launch.xml
+```
+
 Solver and step count are runtime parameters in
-`planner/autoware_diffusion_planner/config/diffusion_planner.param.yaml`:
+`planner/autoware_diffusion_planner_onnx_split_cpp/config/diffusion_planner.param.yaml`:
 
 ```yaml
 solver_type: "dpmpp2"     # one of: dpmpp1 | dpmpp2 | ddim

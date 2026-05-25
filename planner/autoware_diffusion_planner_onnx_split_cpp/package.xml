@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>autoware_diffusion_planner_onnx_split_cpp</name>
+  <version>0.1.0</version>
+  <description>
+    Diffusion Planner with dit_single_step.onnx - Pure C++ Version
+
+    Features:
+    - Single-step DiT with dynamic timestep input
+    - DPM-Solver++ scheduling in pure C++
+    - VP continuous noise schedule
+    - ONNX Runtime for inference
+  </description>
+  <maintainer email="liyunnagoya123@email.com">Yun Li</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- ROS2 dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>visualization_msgs</depend>
+
+  <!-- Autoware message dependencies -->
+  <depend>autoware_planning_msgs</depend>
+  <depend>autoware_perception_msgs</depend>
+  <depend>autoware_vehicle_msgs</depend>
+  <depend>autoware_map_msgs</depend>
+  <depend>autoware_internal_planning_msgs</depend>
+  <depend>autoware_vehicle_info_utils</depend>
+
+  <!-- Diagnostics (required for auto mode!) -->
+  <depend>autoware_utils_diagnostics</depend>
+  <depend>diagnostic_msgs</depend>
+
+  <!-- Required for ROS node preprocessing utilities -->
+  <depend>autoware_diffusion_planner</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

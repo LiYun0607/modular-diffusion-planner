@@ -1,0 +1,44 @@
+/**:
+  ros__parameters:
+    # v3.0 split model paths
+    encoder_model_path: $(env HOME)/autoware_data/diffusion_planner/v3_dpo/context_encoder.onnx
+    dit_model_path: $(env HOME)/autoware_data/diffusion_planner/v3_dpo/dit_core_dynamic.onnx
+    turn_indicator_weights_path: $(env HOME)/autoware_data/diffusion_planner/v3_dpo/turn_indicator_weights_v3.json
+
+    # Args/normalization path (v3.0)
+    args_path: $(env HOME)/autoware_data/diffusion_planner/v3.0/diffusion_planner.param.json
+
+    # DPM-Solver++ settings
+    num_inference_steps: 10
+    solver_order: 2  # 1 = first-order (Euler-like), 2 = second-order (DPM-Solver++)
+
+    # VP noise schedule parameters
+    beta_0: 0.1
+    beta_1: 20.0
+
+    # GPU settings (temporarily use CPU to debug)
+    use_gpu: false
+    gpu_device_id: 0
+
+    # Planning settings
+    planning_frequency_hz: 10.0
+
+    # Postprocessing settings
+    velocity_smoothing_window: 8
+    stopping_threshold: 0.3
+
+    # Neighbor settings
+    ignore_unknown_neighbors: true
+    predict_neighbor_trajectory: true
+
+    # Turn indicator manager (v3)
+    turn_indicator_keep_offset: -1.25   # logit bias for KEEP class
+    turn_indicator_hold_duration: 0.0   # hold last command for N seconds
+
+    # Anytime / Jitter experiment settings
+    anytime_enabled: true           # true = adaptive N, false = fixed N
+    anytime_log_csv: true           # true = inject jitter + log CSV
+    anytime_budget_ms: 60.0         # jitter max (ms)
+    anytime_margin_ms: 20.0         # jitter min (ms)
+    anytime_convergence_threshold: 0.1
+    anytime_min_steps: 3
