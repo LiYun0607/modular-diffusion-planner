@@ -1,0 +1,205 @@
+[
+  {
+    "config": "alpha_16",
+    "best_vio": 0.1,
+    "best_epoch": 8,
+    "jerk_p50": 4.6385000000000005,
+    "mean_speed": 3.66866811692207
+  },
+  {
+    "config": "alpha_64",
+    "best_vio": 0.0,
+    "best_epoch": 4,
+    "jerk_p50": 3.339,
+    "mean_speed": 3.740666463702898
+  },
+  {
+    "config": "beta_001",
+    "best_vio": 0.0,
+    "best_epoch": 4,
+    "jerk_p50": 1.867,
+    "mean_speed": 4.618786675561206
+  },
+  {
+    "config": "beta_1.0",
+    "best_vio": 0.06666666666666667,
+    "best_epoch": 10,
+    "jerk_p50": 3.3095,
+    "mean_speed": 3.765437048642874
+  },
+  {
+    "config": "init_v5",
+    "best_vio": 0.2,
+    "best_epoch": 6,
+    "jerk_p50": 3.7565,
+    "mean_speed": 5.550406252057006
+  },
+  {
+    "config": "lr1e-4_w0.3",
+    "best_vio": 0.1,
+    "best_epoch": 8,
+    "jerk_p50": 1.678,
+    "mean_speed": 3.288287670024773
+  },
+  {
+    "config": "lr1e-4_w0.5",
+    "best_vio": 0.06666666666666667,
+    "best_epoch": 8,
+    "jerk_p50": 1.83,
+    "mean_speed": 4.196703889671645
+  },
+  {
+    "config": "lr1e-4_w0.7",
+    "best_vio": 0.1,
+    "best_epoch": 8,
+    "jerk_p50": 1.8170000000000002,
+    "mean_speed": 4.119868828032204
+  },
+  {
+    "config": "lr1e-5_w0.7_conservative",
+    "best_vio": 0.03333333333333333,
+    "best_epoch": 6,
+    "jerk_p50": 2.463,
+    "mean_speed": 4.712547332695384
+  },
+  {
+    "config": "lr3e-5_w0.3",
+    "best_vio": 0.4,
+    "best_epoch": 10,
+    "jerk_p50": 3.717,
+    "mean_speed": 4.106333672222216
+  },
+  {
+    "config": "lr3e-5_w0.5",
+    "best_vio": 0.23333333333333334,
+    "best_epoch": 10,
+    "jerk_p50": 4.0335,
+    "mean_speed": 4.431207849560891
+  },
+  {
+    "config": "lr3e-5_w0.7",
+    "best_vio": 0.03333333333333333,
+    "best_epoch": 2,
+    "jerk_p50": 2.748,
+    "mean_speed": 4.652681950998242
+  },
+  {
+    "config": "rank_16_32",
+    "best_vio": 0.36666666666666664,
+    "best_epoch": 10,
+    "jerk_p50": 5.1805,
+    "mean_speed": 3.7509378725731626
+  },
+  {
+    "config": "rank_2_4",
+    "best_vio": 0.8333333333333334,
+    "best_epoch": 4,
+    "jerk_p50": 33.92400000000001,
+    "mean_speed": 4.283571398343235
+  },
+  {
+    "config": "rank_8_16",
+    "best_vio": 0.13333333333333333,
+    "best_epoch": 4,
+    "jerk_p50": 3.8609999999999998,
+    "mean_speed": 3.128337259932445
+  },
+  {
+    "config": "sam",
+    "best_vio": 0.0,
+    "best_epoch": 2,
+    "jerk_p50": 1.449,
+    "mean_speed": 4.305569443275377
+  },
+  {
+    "config": "sched_cosine",
+    "best_vio": 0.3,
+    "best_epoch": 6,
+    "jerk_p50": 4.983499999999999,
+    "mean_speed": 4.544365863962975
+  },
+  {
+    "config": "seed_123",
+    "best_vio": 0.5666666666666667,
+    "best_epoch": 2,
+    "jerk_p50": 7.7645,
+    "mean_speed": 6.717570227558233
+  },
+  {
+    "config": "seed_7",
+    "best_vio": 0.3,
+    "best_epoch": 6,
+    "jerk_p50": 3.3955,
+    "mean_speed": 3.8182511608010175
+  },
+  {
+    "config": "src_v2_only",
+    "best_vio": 0.4,
+    "best_epoch": 10,
+    "jerk_p50": 3.717,
+    "mean_speed": 4.106333672222216
+  },
+  {
+    "config": "src_v5_only",
+    "best_vio": 0.03333333333333333,
+    "best_epoch": 6,
+    "jerk_p50": 3.2744999999999997,
+    "mean_speed": 3.7697138109897406
+  },
+  {
+    "config": "tgt_blocks",
+    "best_vio": 0.0,
+    "best_epoch": 2,
+    "jerk_p50": 0.837,
+    "mean_speed": 4.004171138118223
+  },
+  {
+    "config": "tgt_preproj",
+    "best_vio": 0.36666666666666664,
+    "best_epoch": 2,
+    "jerk_p50": 2.933,
+    "mean_speed": 4.89040899376941
+  },
+  {
+    "config": "w0.0_pure_dpo",
+    "best_vio": 1.0,
+    "best_epoch": 2,
+    "jerk_p50": 3627.1059999999998,
+    "mean_speed": 46.59624734436944
+  },
+  {
+    "config": "w0.1_mostly_dpo",
+    "best_vio": 0.5333333333333333,
+    "best_epoch": 10,
+    "jerk_p50": 6.731,
+    "mean_speed": 3.7731925230044987
+  },
+  {
+    "config": "w0.9_mostly_imit",
+    "best_vio": 0.0,
+    "best_epoch": 4,
+    "jerk_p50": 1.6095000000000002,
+    "mean_speed": 4.550752940118628
+  },
+  {
+    "config": "w1.0_pure_imitation",
+    "best_vio": 0.13333333333333333,
+    "best_epoch": 8,
+    "jerk_p50": 3.3945,
+    "mean_speed": 4.414385870405184
+  },
+  {
+    "config": "wd1e-3",
+    "best_vio": 0.26666666666666666,
+    "best_epoch": 4,
+    "jerk_p50": 4.782,
+    "mean_speed": 4.492344010015141
+  },
+  {
+    "config": "wd1e-5",
+    "best_vio": 0.23333333333333334,
+    "best_epoch": 10,
+    "jerk_p50": 4.0335,
+    "mean_speed": 4.431207849560891
+  }
+]

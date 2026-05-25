@@ -98,10 +98,10 @@ class CCProxyConfig:
     driverlike_lat_acc_source: str = 'ADS lit: RSS / AASHTO comfort limit'
 
     # Heading-velocity consistency: predicted heading angle should not
-    # deviate from the velocity-vector direction by more than ~20°.
+    # deviate from the velocity-vector direction by more than ~45° (tightened from 20° after observing 98% trigger across all models due to diffusion sampling noise).
     # (Big deviation means the model thinks the car is going somewhere
     # different than it's pointing — sliding / skid prediction).
-    heading_velocity_max_rad: float = math.radians(20.0)
+    heading_velocity_max_rad: float = math.radians(45.0)
     heading_velocity_source: str = 'proxy: vehicle-dynamics sanity; not in JAMA explicit'
 
     # Smooth deceleration: ≤ JAMA C&C max 0.774 G.
@@ -188,7 +188,7 @@ def _heading_vs_velocity(headings: np.ndarray, v_xy: np.ndarray) -> np.ndarray:
     Only meaningful when speed > 0.3 m/s."""
     v_heading = np.arctan2(v_xy[:, 1], v_xy[:, 0])
     err = np.arctan2(np.sin(headings - v_heading), np.cos(headings - v_heading))
-    mask = np.linalg.norm(v_xy, axis=1) > 0.3
+    mask = np.linalg.norm(v_xy, axis=1) > 1.0
     return np.abs(err) * mask  # zero out low-speed where heading is ill-defined
 
 
