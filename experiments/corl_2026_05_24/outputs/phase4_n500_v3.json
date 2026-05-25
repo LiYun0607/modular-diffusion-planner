@@ -1236,5 +1236,95 @@
         "speed_change_comfort": 0.0
       }
     }
+  },
+  "v3_dpo_march_production": {
+    "_overall": {
+      "n": 500,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.974,
+      "comfort_violation_rate": 0.004,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.97,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.004,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.004,
+        "speed_change_comfort": 0.0
+      }
+    },
+    "curve": {
+      "n": 275,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.9963636363636363,
+      "comfort_violation_rate": 0.007272727272727273,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.9963636363636363,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.007272727272727273,
+        "speed_change_comfort": 0.0
+      }
+    },
+    "cold_start": {
+      "n": 79,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.8734177215189873,
+      "comfort_violation_rate": 0.0,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.8734177215189873,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.0
+      }
+    },
+    "straight": {
+      "n": 146,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.9863013698630136,
+      "comfort_violation_rate": 0.0,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.9726027397260274,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.0136986301369863,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.0
+      }
+    }
   }
 }

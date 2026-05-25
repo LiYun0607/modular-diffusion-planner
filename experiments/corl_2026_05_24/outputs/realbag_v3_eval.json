@@ -1,0 +1,228 @@
+{
+  "R1_rep1_baseline": {
+    "_overall": {
+      "n": 27154,
+      "strict_safety_violation_rate": 0.0007365397363187744,
+      "driverlike_violation_rate": 0.02051263165647787,
+      "comfort_violation_rate": 0.37666642115342125,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 7.365397363187744e-05,
+        "extreme_lat_acc": 0.0006628857626868969,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.005303086101495175,
+        "heading_velocity_inconsistency": 7.365397363187744e-05,
+        "driverlike_decel": 0.0019886572880606908,
+        "driverlike_accel": 0.009943286440303454,
+        "planner_stuck": 0.004566546365176402,
+        "jerk_comfort": 0.36738602047580465,
+        "lat_acc_comfort": 0.09689180231273477,
+        "speed_change_comfort": 0.1365912941003167
+      }
+    },
+    "cold_start": {
+      "n": 15433,
+      "strict_safety_violation_rate": 0.00019438864770297414,
+      "driverlike_violation_rate": 0.00706278753320806,
+      "comfort_violation_rate": 0.14041339985744833,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.00019438864770297414,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0022678675565346983,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.005183697272079311,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.1382751247327156,
+        "lat_acc_comfort": 0.007321972396812026,
+        "speed_change_comfort": 0.028380742564634225
+      }
+    },
+    "straight": {
+      "n": 6406,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.027630346550109274,
+      "comfort_violation_rate": 0.4959413050265376,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0009366219169528567,
+        "driverlike_accel": 0.00842959725257571,
+        "planner_stuck": 0.018264127380580704,
+        "jerk_comfort": 0.49110209178894787,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.104589447393069
+      }
+    },
+    "curve": {
+      "n": 5315,
+      "strict_safety_violation_rate": 0.003198494825964252,
+      "driverlike_violation_rate": 0.05098777046095955,
+      "comfort_violation_rate": 0.9189087488240828,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.00037629350893697084,
+        "extreme_lat_acc": 0.0028222013170272815,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.02050799623706491,
+        "heading_velocity_inconsistency": 0.00037629350893697084,
+        "driverlike_decel": 0.0090310442144873,
+        "driverlike_accel": 0.025587958607714015,
+        "planner_stuck": 0.001317027281279398,
+        "jerk_comfort": 0.8835371589840075,
+        "lat_acc_comfort": 0.4737535277516463,
+        "speed_change_comfort": 0.4893697083725306
+      }
+    }
+  },
+  "R1_rep1_kashiwa_selora": {
+    "_overall": {
+      "n": 14275,
+      "strict_safety_violation_rate": 0.008336252189141856,
+      "driverlike_violation_rate": 0.05218914185639229,
+      "comfort_violation_rate": 0.4774781085814361,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0013309982486865149,
+        "extreme_lat_acc": 0.007355516637478109,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.04364273204903678,
+        "heading_velocity_inconsistency": 7.005253940455341e-05,
+        "driverlike_decel": 0.0037828371278458843,
+        "driverlike_accel": 0.020035026269702275,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.4752364273204904,
+        "lat_acc_comfort": 0.1045183887915937,
+        "speed_change_comfort": 0.09989492119089317
+      }
+    },
+    "cold_start": {
+      "n": 5696,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.00017556179775280898,
+      "comfort_violation_rate": 0.004740168539325843,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.00017556179775280898,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.004740168539325843,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.000526685393258427
+      }
+    },
+    "straight": {
+      "n": 3046,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.0075508864084044645,
+      "comfort_violation_rate": 0.6799080761654629,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0075508864084044645,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.6785948785292186,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.07715036112934996
+      }
+    },
+    "curve": {
+      "n": 5533,
+      "strict_safety_violation_rate": 0.021507319718055303,
+      "driverlike_violation_rate": 0.1303090547623351,
+      "comfort_violation_rate": 0.8527019699981927,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0034339418037231157,
+        "extreme_lat_acc": 0.0189770468100488,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.11259714440628954,
+        "heading_velocity_inconsistency": 0.0001807337791433219,
+        "driverlike_decel": 0.009759624073739382,
+        "driverlike_accel": 0.04735225013555033,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.8476414241821797,
+        "lat_acc_comfort": 0.26965479848183627,
+        "speed_change_comfort": 0.2147117296222664
+      }
+    }
+  },
+  "R1_rep2_kashiwa_selora": {
+    "_overall": {
+      "n": 15755,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.0,
+      "comfort_violation_rate": 0.0,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.0
+      }
+    },
+    "cold_start": {
+      "n": 15755,
+      "strict_safety_violation_rate": 0.0,
+      "driverlike_violation_rate": 0.0,
+      "comfort_violation_rate": 0.0,
+      "per_criterion_rate": {
+        "collision_proxy_min_distance": 0.0,
+        "ttc_below_min": 0.0,
+        "route_corridor_departure": 0.0,
+        "extreme_decel": 0.0,
+        "extreme_lat_acc": 0.0,
+        "cold_start_accel_burst": 0.0,
+        "driverlike_lat_acc": 0.0,
+        "heading_velocity_inconsistency": 0.0,
+        "driverlike_decel": 0.0,
+        "driverlike_accel": 0.0,
+        "planner_stuck": 0.0,
+        "jerk_comfort": 0.0,
+        "lat_acc_comfort": 0.0,
+        "speed_change_comfort": 0.0
+      }
+    }
+  }
+}
