@@ -29,6 +29,9 @@ itsc2026-release/
 ├── planner/                           # ROS 2 C++ package (modular planner)
 │   └── autoware_diffusion_planner/    #   - inference/ : split-ONNX + DPM-Solver++ in C++
 │                                      #   - postprocessing/turn_indicator_manager
+├── scripts/onnx_split/                # GraphSurgeon scripts to split monolithic ONNX
+│   ├── graphsurgeon_split.py          #   produces context_encoder.onnx + dit_core.onnx
+│   └── analyze_onnx_split.py          #   inspects graph to find cut point
 ├── patches/                           # Diff against upstream autowarefoundation/autoware_universe
 │   └── modular_planner_vs_upstream.patch
 ├── benchmarks/                        # Offline benchmark + figure scripts
@@ -64,9 +67,19 @@ Required model artefacts (downloaded via Autoware's `setup-dev-env.sh`):
 └── diffusion_planner.param.json
 ```
 
-The split ONNX files are produced from the monolithic graph using
-[ONNX GraphSurgeon](https://github.com/NVIDIA/TensorRT/tree/main/tools/onnx-graphsurgeon);
-a recipe will be added under `benchmarks/graphsurgeon_recipe.md` (TODO).
+The split ONNX files are produced from the monolithic `diffusion_planner.onnx`
+using [ONNX GraphSurgeon](https://github.com/NVIDIA/TensorRT/tree/main/tools/onnx-graphsurgeon):
+
+```bash
+pip install onnx onnx-graphsurgeon
+export DIFFUSION_PLANNER_MODEL_DIR=~/autoware_data/diffusion_planner/v3.0
+python scripts/onnx_split/graphsurgeon_split.py
+# writes context_encoder.onnx + dit_core.onnx into $DIFFUSION_PLANNER_MODEL_DIR
+```
+
+See [`scripts/onnx_split/README.md`](scripts/onnx_split/README.md) for details
+and `--help` for all options. Pre-split weights for the version used in the
+paper are attached to the GitHub Release (TODO: upload).
 
 ### 2. Launch in AWSIM
 
